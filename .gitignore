@@ -1,0 +1,5 @@
+build/
+.vs/
+Win32/
+*.lib
+*.dll
