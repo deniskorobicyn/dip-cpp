@@ -1,0 +1,62 @@
+version: '1'
+
+environment:
+  DOCKER_RUBY_VERSION: 1.9.3
+  COMPOSE_FILE_EXT: development
+  PROJECT: docker
+  DEPLOY: development
+  APRESS_GEMS_CREDENTIALS: ""
+  RAILS_ENV: development
+  RAILS_32: "0"
+  JOBS: "3"
+  CACHE: ""
+  PROFILE: ""
+  HOME: C:\Users\Surface-PC
+
+compose:
+  files:
+    - docker/docker-compose.yml
+    - docker/docker-compose.${COMPOSE_FILE_EXT}.yml
+  project_name: pulscen${RAILS_ENV}
+
+
+interaction:
+  sh:
+    service: app
+
+  irb:
+    service: app
+    command: irb
+
+  bundle:
+    service: app
+    command: bundle
+
+  rake:
+    service: app
+    command: bundle exec rake
+
+  rails:
+    service: app
+    subcommands:
+      s:
+        service: web
+
+      c:
+        command: bundle exec rails c
+
+  rspec:
+    service: app
+    command: bundle exec rspec
+
+  psql:
+    service: pg
+    command: psql -h localhost -U postgres pulscen
+
+provision:
+  - docker volume create --name bundler_data
+  - dip sh ./script/config_env
+  - dip compose up -d pg stat_pg orders_pg redis sphinx
+  - dip bundle config --local https://gems.railsc.ru/ ${APRESS_GEMS_CREDENTIALS}
+  - dip bundle install
+  - dip bundle exec rake db:migrate sphinx:rebuild
