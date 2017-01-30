@@ -10,9 +10,10 @@
 
 using namespace dip;
 
-Arguments::Arguments(int argc, char** argv) {
+Arguments::Arguments(int argc, char** argv, char** envp) {
 	this->_argc = argc;
 	this->_argv = argv;
+	this->_envp = envp;
 }
 
 int Arguments::parse() {
@@ -85,4 +86,8 @@ std::string dip::Arguments::params_at(int index)
 		return "";
 
 	return this->_splited_params[index];
+}
+
+char** dip::Arguments::envp() {
+	return this->_envp;
 }

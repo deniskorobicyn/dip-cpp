@@ -1,9 +1,0 @@
-version: '2'
-services:
-  dnsdock:
-    build: .
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    container_name: dnsdock-manual
-    ports:
-      - 53:53/udp

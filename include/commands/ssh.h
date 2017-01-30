@@ -8,7 +8,7 @@ namespace dip {
 		Dip* _dip;
 	public:
 		Ssh(Dip*);
-		void run(std::string);
+		void run(std::string, std::string);
 	};
 }
 #endif

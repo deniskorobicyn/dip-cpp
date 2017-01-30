@@ -25,6 +25,8 @@ namespace dip {
 		void _service();
 		void _show_help();
 		void _compose();
+		void _dnsdock();
+		void _ssh();
 
 		void _load_config();
 		Code _command_code(std::string);

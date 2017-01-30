@@ -1,9 +1,14 @@
 #include <iostream>
+#include <algorithm>
+
 #include "dip.h"
 #include "arguments.h"
 #include "commands/compose.h"
 #include "commands/service.h"
+#include "commands/dnsdock.h"
+#include "commands/ssh.h"
 #include "environment.h"
+
 
 using namespace dip;
 
@@ -25,7 +30,11 @@ void Dip::execute() {
 		_compose();
 		break;
 	case dip::Dip::Code::DNSDOCK:
+		_dnsdock();
+		break;
 	case dip::Dip::Code::SSH:
+		_ssh();
+		break;
 	case dip::Dip::Code::HELP:
 	default:
 		_show_help();
@@ -45,7 +54,11 @@ void dip::Dip::_provision()
 		std::string command = it->as<std::string>();
 
 		std::cout << "Executing: " << command << std::endl;
-		system(command.c_str());
+		
+		if (0 != system(_env->replace(command).c_str())) {
+			std::cout << "Provision failed" << std::endl;
+			break;
+		}
 	}
 }
 void dip::Dip::_service()
@@ -53,10 +66,32 @@ void dip::Dip::_service()
 	Service s(this);
 	s.run(_args->command_name(), _args);
 }
+
 void dip::Dip::_compose() {
 	Compose c(this);
 	c.run(_args->params());
 }
+
+void dip::Dip::_dnsdock() {
+	Dnsdock dns(this);
+	dns.run(_args->params());
+}
+
+void dip::Dip::_ssh() {
+	Ssh ssh(this);
+	std::string path = _args->params_at(1);
+	if (path.empty()) {
+
+#ifdef WIN32
+		path = (*_env)["USERPROFILE"] + "/.ssh";
+		std::replace(path.begin(), path.end(), '\\', '/');
+#else
+		path = (*_env)["HOME"] + "/.ssh/";
+#endif
+	}
+	ssh.run(_args->params_at(0), path);
+}
+
 void dip::Dip::_show_help()
 {
 	std::cout << "some help message here" << std::endl;
@@ -102,7 +137,7 @@ bool dip::Dip::_commands_include(std::string name)
 void dip::Dip::_load_config()
 {
 	_root = YAML::LoadFile(_args->config_path());
-	_env = std::make_shared<Environment>(&_root["environment"]);
+	_env = std::make_shared<Environment>(&_root["environment"], _args->envp());
 	_loaded = true;
 }
 
