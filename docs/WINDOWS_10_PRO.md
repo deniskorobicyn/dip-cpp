@@ -1,6 +1,6 @@
 # Setup for windows 10 pro
 
-1. Download [release](https://github.com/deniskorobicyn/dip-cpp/releases/download/v0.1.0/dip.exe)
+1. Download latest [release](https://github.com/deniskorobicyn/dip-cpp/releases/)
 2. Add folder with dip.exe to PATH in system settings (Control Panel -> System -> Advanced System settings -> Environment Variables -> Add to System variable `Path` dip.exe folder)
 3. Install docker 1.12.5 - [installer](https://download.docker.com/win/stable/1.12.5.9503/InstallDocker.msi)
 4. Download docker-compose 1.10.0 from docker-compose repo - [link](https://github.com/docker/compose/releases/download/1.10.0/docker-compose-Windows-x86_64.exe)
