@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  agent:
+    build: .
+    container_name: ssh-agent
+    volumes:
+      - data:/ssh
+
+  key:
+    build: .
+    command: 'ssh-add'
+    volumes:
+      - data:/ssh
+    depends_on:
+      - agent
+
+volumes:
+  data:
+    driver: local
