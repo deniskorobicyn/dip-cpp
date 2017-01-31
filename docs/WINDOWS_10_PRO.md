@@ -7,6 +7,6 @@
 5. Replace docker-compose.exe in docker installation folder (`%DOCKERPATH%\resources\bin\docker-compose.exe`)
 6. Start dns `dip dns up`
 7. Add `dns: ["172.17.0.1"]` to docker daemon config in docker settings
-8. Execute in CMD as admin `route -p add 172.17.0.0 MASK 255.240.0.0 10.0.75.2`
+8. Execute in CMD as admin `route -p add 172.16.0.0 MASK 255.240.0.0 10.0.75.2`
 9. Add custom DNS in network settings (Control Panel -> Network and Sharing center -> Change adapter settings -> Right clink on you network -> Properties ->  Internet Protocol Version 4 (TCP/IP4) -> Properties -> DNS -> add value `127.0.0.1`)
 10. Done! Happy hacking!
