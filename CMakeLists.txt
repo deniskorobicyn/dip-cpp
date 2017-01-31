@@ -26,7 +26,7 @@ endif()
 
 add_library(libyaml-cpp STATIC IMPORTED)
 # TODO: use suffic variable if not WIN32
-set_property(TARGET libyaml-cpp PROPERTY IMPORTED_LOCATION ${BINARY_DIR}/${CMAKE_CFG_INTDIR}/libyaml-cpp${yaml_library_suffix}d${yaml_library_extension}) 
+set_property(TARGET libyaml-cpp PROPERTY IMPORTED_LOCATION ${BINARY_DIR}/${CMAKE_CFG_INTDIR}/libyaml-cpp${yaml_library_suffix}${yaml_library_extension}) 
 add_dependencies(libyaml-cpp yaml-cpp)
 
 # From http://www.cmake.org/pipermail/cmake/2010-March/035992.html:

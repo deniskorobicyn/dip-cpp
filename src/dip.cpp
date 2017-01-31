@@ -17,8 +17,6 @@ Dip::Dip(std::shared_ptr<Arguments> args) : _loaded(false) {
 }
 
 void Dip::execute() {
-	if (!_loaded) _load_config();
-
 	switch (_command_code(_args->command_name())) {
 	case dip::Dip::Code::SERVICE:
 		_service();
@@ -83,10 +81,10 @@ void dip::Dip::_ssh() {
 	if (path.empty()) {
 
 #ifdef WIN32
-		path = (*_env)["USERPROFILE"] + "/.ssh";
+		path = std::string(getenv("USERPROFILE")) + "/.ssh";
 		std::replace(path.begin(), path.end(), '\\', '/');
 #else
-		path = (*_env)["HOME"] + "/.ssh/";
+		path = std::string(getenv("HOME")) + "/.ssh/";
 #endif
 	}
 	ssh.run(_args->params_at(0), path);

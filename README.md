@@ -19,5 +19,4 @@ Please refer to dip [README](https://github.com/bibendi/dip/blob/master/README.m
  - refactoring
  - tests
  - Better help messaging
- - fix problem with executing general commands without `dip.yml`
  - fix CMake debug switch (d symbol)
