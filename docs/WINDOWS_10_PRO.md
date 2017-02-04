@@ -12,7 +12,7 @@
 10. Done! Happy hacking!
 
 
-If you wnat to use latest docker version (1.13.0), you'll requeired to run 
+If you want to use latest docker version (1.13.0), you'll requeired to run 
 
 ```
 docker run --rm -ti --privileged --network=none --pid=host justincormack/nsenter1 bin/sh -c "iptables -A FORWARD -j ACCEPT"
