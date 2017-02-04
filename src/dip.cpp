@@ -42,10 +42,13 @@ void Dip::execute() {
 
 void dip::Dip::_provision()
 {
+	if (!_loaded) _load_config();
+
 	const YAML::Node provision_node = _root["provision"];
 
 	if (!provision_node.IsSequence()) {
-		std::cout << "Provision is invalid or empty" << std::endl;
+		std::cout << "Provision is invalid or empty!" << std::endl;
+		return;
 	}
 
 	for (YAML::const_iterator it = provision_node.begin(); it != provision_node.end(); ++it) {
