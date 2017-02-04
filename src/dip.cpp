@@ -92,11 +92,28 @@ void dip::Dip::_ssh() {
 
 void dip::Dip::_show_help()
 {
-	std::cout << "some help message here" << std::endl;
+	std::cout <<
+		"Docker Interaction Process (CPP version) \n"
+		"Its a simple docker process runner. \n"
+		"For full expirience it reqiured defined dip.yml. \n"
+		"You can provide path to it by param --config \n"
+		"   dip --config path/to/convig some command \n"
+		""
+		"Usage: \n"
+		" - Compose \n"
+		"   dip compose run some_service \n"
+		" - Run \n"
+		"   dip some_command_from_dip_yml \n"
+		" - DNS may used without dip.yml \n"
+		"   dip dns up \n"
+		" - SSH may used without dip.yml \n"
+		"   dip ssh add \n"
+		"   dip ssh down \n"
+		<< std::endl;
 }
 
 dip::Dip::Code dip::Dip::_command_code(std::string name) {
-	if ("--help" == name) {
+	if ("--help" == name || "help" == name) {
 		return dip::Dip::Code::HELP;
 	}
 	else if ("provision" == name) {

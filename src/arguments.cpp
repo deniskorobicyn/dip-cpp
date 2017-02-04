@@ -30,13 +30,16 @@ int Arguments::parse() {
 			this->_config_path = _argv[start_arg];
 		}
 		else {
+			_error_message = "--config require path argument";
 			return 1;
 		}
 	}
 	else {
 		char currentPath[FILENAME_MAX];
 		if (!GetCurrentDir(currentPath, sizeof(currentPath))) {
-			return 1; // TODO: consider return codes;
+			_error_message = "Current path is too long";
+
+			return 1;
 		}
 		else {
 			_config_path = std::string(currentPath) + "\\dip.yml";
@@ -49,6 +52,7 @@ int Arguments::parse() {
 		start_arg++;
 	}
 	else {
+		_error_message = "Command is required";
 		return 1;
 	}
 
@@ -90,4 +94,8 @@ std::string dip::Arguments::params_at(int index)
 
 char** dip::Arguments::envp() {
 	return this->_envp;
+}
+
+std::string dip::Arguments::error_message() const {
+	return this->_error_message;
 }

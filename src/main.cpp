@@ -13,8 +13,7 @@ int main(int argc, char **argv, char** envp) {
 	Arguments args(argc, argv, envp);
 
 	if (1 == args.parse()) {
-		std::cout << "something bad happend" << std::endl;
-		system("pause");
+		std::cout << args.error_message() << std::endl;
 		return 1;
 	}
 
