@@ -12,6 +12,7 @@ namespace dip {
 		Environment(YAML::Node*, char**);
 
 		std::string replace(std::string);
+		void set(std::string, std::string);
 		std::string operator[](std::string);
 	};
 }

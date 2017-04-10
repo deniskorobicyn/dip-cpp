@@ -1,10 +1,14 @@
 #include "commands/compose.h"
 #include "dip.h"
 #include <string>
+#include <iostream>
 
 void dip::Compose::run(std::string params)
 {
-	std::string command = "docker-compose " + _files() + " " + _project_name() + " " + params;
+	std::string command = "docker-compose " + _files() + " " + _project_name();
+	if (!params.empty()) {
+		command += " " + params;
+	}
 	system(command.c_str());
 }
 

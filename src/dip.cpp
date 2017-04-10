@@ -184,6 +184,10 @@ std::string dip::Dip::dig(std::vector<std::string> keys, std::string prefix)
 	};
 }
 
+void dip::Dip::merge_env(std::string key, std::string value) {
+	_env->set(key, value);
+}
+
 YAML::Node dip::Dip::operator[](std::string key)
 {
 	return _root[key];

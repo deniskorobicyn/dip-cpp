@@ -78,8 +78,10 @@ std::string dip::Arguments::params(int index) const
 {
 	std::string res = "";
 	for (int i = index; i < _splited_params.size(); ++i) {
-		res += _splited_params[i];
-		res += " ";
+		if (!_splited_params[i].empty()) {
+			res += "\"" + _splited_params[i] + "\"";
+			res += " ";
+		}
 	}
 	return res;
 }

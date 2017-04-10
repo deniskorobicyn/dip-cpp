@@ -36,3 +36,8 @@ std::string dip::Environment::operator[](std::string key)
 {
 	return _env[key];
 }
+
+void dip::Environment::set(std::string key, std::string value) {
+	_env[key] = value;
+	_putenv((key + "=" + value).c_str());
+}

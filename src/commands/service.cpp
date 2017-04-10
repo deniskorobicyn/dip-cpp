@@ -1,4 +1,5 @@
 #include "commands/service.h"
+#include "commands/compose.h"
 #include "dip.h"
 #include "arguments.h"
 #include <iostream>
@@ -46,7 +47,17 @@ void dip::Service::run(std::string name, std::shared_ptr<Arguments> args)
 			}
 			service_args = args->params();
 		}
+
+		YAML::Node environment = service_node["environment"];
+		if (environment.IsMap()) {
+			for (YAML::const_iterator it = environment.begin(); it != environment.end(); ++it) {
+				_dip->merge_env(it->first.as<std::string>(), it->second.as<std::string>());
+			}
+			
+		}
 	}
 
-	system((std::string("dip compose run --rm ") + service_name + " " + service_command + " " + service_args).c_str());
+    std::string command = std::string("run --rm ") + service_name + " " + service_command + " " + service_args;
+	dip::Compose compose(this->_dip);
+	compose.run(command);
 }
