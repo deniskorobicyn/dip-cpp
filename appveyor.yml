@@ -8,7 +8,7 @@ environment:
   matrix:
   - Toolset: v150
   - Toolset: v140
-  - Toolset: v120
+ # - Toolset: v120 WAITING - https://github.com/jbeder/yaml-cpp/pull/477
 
 platform:
   - Win32
