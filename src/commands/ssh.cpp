@@ -14,7 +14,7 @@ void dip::Ssh::run(std::string command, std::string path)
 {
 	if ("add" == command) {
 #ifdef WIN32
-		
+
 		system("docker volume create --name ssh_data");
 		system("docker volume create --name ssh_user_data");
 		system("docker run -d -v ssh_data:/ssh -v ssh_user_data:/root/.ssh --name=ssh-agent  whilp/ssh-agent");

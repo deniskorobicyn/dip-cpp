@@ -7,12 +7,12 @@ project (dip)
 include(ExternalProject)
 include(CTest)
 
-set(dip_sources ${CMAKE_CURRENT_SOURCE_DIR}/src/arguments.cpp 
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/dip.cpp 
-			${CMAKE_CURRENT_SOURCE_DIR}/src/environment.cpp 
-			${CMAKE_CURRENT_SOURCE_DIR}/src/commands/compose.cpp 
-			${CMAKE_CURRENT_SOURCE_DIR}/src/commands/dnsdock.cpp 
-			${CMAKE_CURRENT_SOURCE_DIR}/src/commands/service.cpp 
+set(dip_sources ${CMAKE_CURRENT_SOURCE_DIR}/src/arguments.cpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/dip.cpp
+			${CMAKE_CURRENT_SOURCE_DIR}/src/environment.cpp
+			${CMAKE_CURRENT_SOURCE_DIR}/src/commands/compose.cpp
+			${CMAKE_CURRENT_SOURCE_DIR}/src/commands/dnsdock.cpp
+			${CMAKE_CURRENT_SOURCE_DIR}/src/commands/service.cpp
 			${CMAKE_CURRENT_SOURCE_DIR}/src/commands/ssh.cpp)
 
 set(EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
@@ -30,8 +30,8 @@ link_directories(${EXTERNAL_INSTALL_LOCATION}/yaml-cpp/lib)
 add_executable(dip  ${dip_sources} ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 add_dependencies(dip yaml-cpp)
 
-if(WIN32)                       
-  set(yaml_library_suffix "md")       
+if(WIN32)
+  set(yaml_library_suffix "md")
 endif()
 
 target_link_libraries(dip libyaml-cpp${yaml_library_suffix}$<$<CONFIG:Debug>:d>)

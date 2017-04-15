@@ -27,7 +27,7 @@ namespace dip {
 		void _compose();
 		void _dnsdock();
 		void _ssh();
-		
+
 
 		void _load_config();
 		Code _command_code(std::string);
@@ -40,7 +40,7 @@ namespace dip {
 
 		void merge_env(std::string key, std::string value);
 		std::string dig(std::vector<std::string> keys, std::string prefix);
-		
+
 	};
 }
 #endif // !__H_DIP__

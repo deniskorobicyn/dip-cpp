@@ -22,7 +22,11 @@ link_directories(${EXTERNAL_INSTALL_LOCATION}/gtest/lib)
 
 add_executable(run_test ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
 add_dependencies(run_test googletest)
-target_link_libraries(run_test gtest gtest_main)
+if(WIN32)
+  set(yaml_library_suffix "md")
+endif()
+
+target_link_libraries(run_test gtest gtest_main libyaml-cpp${yaml_library_suffix}$<$<CONFIG:Debug>:d>)
 
 add_test(NAME    run_test
          COMMAND run_test)

@@ -53,7 +53,7 @@ void dip::Service::run(std::string name, std::shared_ptr<Arguments> args)
 			for (YAML::const_iterator it = environment.begin(); it != environment.end(); ++it) {
 				_dip->merge_env(it->first.as<std::string>(), it->second.as<std::string>());
 			}
-			
+
 		}
 	}
 

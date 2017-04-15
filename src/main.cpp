@@ -9,7 +9,7 @@
 using namespace dip;
 
 int main(int argc, char **argv, char** envp) {
-	
+
 	Arguments args(argc, argv, envp);
 
 	if (1 == args.parse()) {
@@ -18,7 +18,7 @@ int main(int argc, char **argv, char** envp) {
 	}
 
 	Dip dip(std::make_shared<Arguments>(args));
-	
+
 	try {
 		dip.execute();
 	} catch (YAML::BadFile e) {

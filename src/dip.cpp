@@ -55,7 +55,7 @@ void dip::Dip::_provision()
 		std::string command = it->as<std::string>();
 
 		std::cout << "Executing: " << command << std::endl;
-		
+
 		if (0 != system(_env->replace(command).c_str())) {
 			std::cout << "Provision failed" << std::endl;
 			break;
@@ -145,10 +145,10 @@ bool dip::Dip::_commands_include(std::string name)
 		return false;
 	}
 
-	for (YAML::const_iterator it = interactions_node.begin(); it != interactions_node.end(); ++it) 
+	for (YAML::const_iterator it = interactions_node.begin(); it != interactions_node.end(); ++it)
 		if (it->first.as<std::string>() == name)
 			return true;
-		
+
 	return false;
 }
 
@@ -166,7 +166,7 @@ std::string dip::Dip::dig(std::vector<std::string> keys, std::string prefix)
 	YAML::Node* node = &_root;
 	for (auto it : keys)
 		node = &((*node)[it]);
-	
+
 	std::string sequence_result = "";
 	switch (node->Type()) {
 	case YAML::NodeType::Scalar:
