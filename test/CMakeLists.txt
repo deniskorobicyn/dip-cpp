@@ -24,6 +24,5 @@ add_executable(run_test ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
 add_dependencies(run_test googletest)
 target_link_libraries(run_test gtest gtest_main)
 
-enable_testing()
 add_test(NAME    run_test
          COMMAND run_test)
