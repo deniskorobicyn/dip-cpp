@@ -1,0 +1,7 @@
+text eol=lf
+
+*.txt text
+*.cpp text
+*.h text
+*.json text
+*.md text

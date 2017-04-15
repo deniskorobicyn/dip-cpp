@@ -1,5 +1,6 @@
 build/
 .vs/
 Win32/
+Testing/
 *.lib
 *.dll
