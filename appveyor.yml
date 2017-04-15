@@ -7,6 +7,8 @@ image: Visual Studio 2017
 environment:
   matrix:
   - Toolset: v150
+  - Toolset: v140
+  - Toolset: v120
 
 platform:
   - Win32
@@ -28,8 +30,6 @@ before_build:
         "v150" {"Visual Studio 15 2017"}
         "v140" {"Visual Studio 14 2015"}
         "v120" {"Visual Studio 12 2013"}
-        "v110" {"Visual Studio 11 2012"}
-        "v100" {"Visual Studio 10 2010"}
     }
     if ($env:PLATFORM -eq "x64")
     {
@@ -38,10 +38,6 @@ before_build:
 
 build_script:
 - ps: |
-    if (($env:TOOLSET -eq "v100") -and ($env:PLATFORM -eq "x64"))
-    {
-        return
-    }
     md build -Force | Out-Null
     cd build
     & cmake -G "$generator" -DCMAKE_CONFIGURATION_TYPES="Debug;Release" ..
@@ -55,11 +51,7 @@ build_script:
 
 test_script:
 - ps: |
-    if (($env:Toolset -eq "v100") -and ($env:PLATFORM -eq "x64"))
-    {
-        return
-    }
-    & ctest -C $env:CONFIGURATION --output-on-failure
+    ctest -C $env:CONFIGURATION --output-on-failure
     if ($LastExitCode -ne 0) {
         throw "Exec: $ErrorMessage"
     }
