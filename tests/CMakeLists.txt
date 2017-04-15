@@ -12,8 +12,6 @@ ExternalProject_Add(googletest
   GIT_TAG "release-1.8.0"
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION} -Dgtest_force_shared_crt=ON
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/googletest/
-  LOG_DOWNLOAD 1
-  LOG_UPDATE 1
 )
 
 ExternalProject_Get_Property(googletest source_dir binary_dir)

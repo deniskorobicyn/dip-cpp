@@ -12,8 +12,6 @@ ExternalProject_Add(
     # Disable install step
     INSTALL_COMMAND ""
     UPDATE_COMMAND ""
-    LOG_DOWNLOAD 1
-    LOG_UPDATE 1
 )
 
 ExternalProject_Get_Property(yaml-cpp SOURCE_DIR BINARY_DIR)
