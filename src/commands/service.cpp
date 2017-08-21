@@ -16,7 +16,7 @@ void dip::Service::run(std::string name, std::shared_ptr<Arguments> args)
 
 	YAML::Node service_node = interation_node[name];
 
-	std::string service_name = "", service_command = "", service_args = "";
+	std::string service_name = "", service_command = "", service_args = "", service_options = "";
 	if (service_node.IsMap()) {
 		if (service_node["service"].IsScalar()) {
 			service_name = service_node["service"].as<std::string>();
@@ -34,6 +34,16 @@ void dip::Service::run(std::string name, std::shared_ptr<Arguments> args)
 					if (subcommand["command"].IsScalar()) {
 						service_command = subcommand["command"].as<std::string>();
 					}
+
+					std::cout << service_node["compose_run_options"] << std::endl;
+					if (service_node["compose_run_options"].IsSequence()) {
+						const YAML::Node options = service_node["compose_run_options"];
+
+						for (YAML::const_iterator it = options.begin(); it != options.end(); ++it) {
+							std::cout << service_options << std::endl;
+							service_options += " --" + it->as<std::string>();
+						}
+					}
 				}
 				service_args = args->params(1);
 			}
@@ -44,6 +54,16 @@ void dip::Service::run(std::string name, std::shared_ptr<Arguments> args)
 			}
 			if (service_node["command"].IsScalar()) {
 				service_command = service_node["command"].as<std::string>();
+			}
+
+			std::cout << service_node["compose_run_options"] << std::endl;
+			if (service_node["compose_run_options"].IsSequence()) {
+				const YAML::Node options = service_node["compose_run_options"];
+
+				for (YAML::const_iterator it = options.begin(); it != options.end(); ++it) {
+					std::cout << service_options << std::endl;
+					service_options += " --" + it->as<std::string>();
+				}
 			}
 			service_args = args->params();
 		}
@@ -57,7 +77,8 @@ void dip::Service::run(std::string name, std::shared_ptr<Arguments> args)
 		}
 	}
 
-    std::string command = std::string("run --rm ") + service_name + " " + service_command + " " + service_args;
+    std::string command = std::string("run --rm ") + service_options + " " + service_name + " " + service_command + " " + service_args;
 	dip::Compose compose(this->_dip);
+	std::cout << command << std::endl;
 	compose.run(command);
 }

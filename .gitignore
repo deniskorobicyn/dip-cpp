@@ -1,4 +1,5 @@
 build/
+.vscode/
 .vs/
 Win32/
 Testing/
